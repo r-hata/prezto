@@ -11,21 +11,29 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-# Display Current Directory in WSL Terminal Titlebar.
+# Display Current Directory on WSL Terminal Titlebar.
 if [[ $(uname -a) == Linux*Microsoft* ]]; then
   echo -ne "\e]0;  $(prompt-pwd)\007"
   chpwd(){echo -ne "\e]0; $(prompt-pwd)\007"}
 fi
 
-# Setting alias
+# Append PATH
+if [[ -z $TMUX ]]; then # Suppress overloading by tmux
+  #Initialize rbenv
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
+
+# Set alias
 # ls
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls -F --color=auto'
 fi
 
-# Setting tmux
+# Set tmux
 # Startup tmux
+# This command must be executed after setting PATH
 [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
 
 # Setting plugins
