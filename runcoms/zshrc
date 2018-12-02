@@ -18,10 +18,14 @@ if [[ $(uname -a) == Linux*Microsoft* ]]; then
 fi
 
 # Append PATH
-if [[ -z $TMUX ]]; then # Suppress overloading by tmux
-  #Initialize rbenv
+if [ -d ${HOME}/.rbenv ]; then
+  # Initialize rbenv
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
+fi
+if [ -d ${HOME}/.nodebrew ]; then
+  # Initialize nodebrew
+  export PATH="$HOME/.nodebrew/current/bin:$PATH"
 fi
 
 # Set alias
