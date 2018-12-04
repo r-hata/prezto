@@ -27,6 +27,8 @@ if [ -d ${HOME}/.nodebrew ]; then
   # Initialize nodebrew
   export PATH="$HOME/.nodebrew/current/bin:$PATH"
 fi
+# Resolve duplicate paths
+typeset -U path PATH
 
 # Set alias
 # ls
@@ -34,11 +36,6 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls -F --color=auto'
 fi
-
-# Set tmux
-# Startup tmux
-# This command must be executed after setting PATH
-[[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
 
 # Setting plugins
 # fzf
