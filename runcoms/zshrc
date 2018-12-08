@@ -30,6 +30,9 @@ fi
 # Resolve duplicate paths
 typeset -U path PATH
 
+# go-lang setting
+export GOPATH=$HOME/.go
+
 # Set alias
 # ls
 if [ -x /usr/bin/dircolors ]; then
