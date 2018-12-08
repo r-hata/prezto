@@ -27,6 +27,9 @@ if [ -d ${HOME}/.nodebrew ]; then
   # Initialize nodebrew
   export PATH="$HOME/.nodebrew/current/bin:$PATH"
 fi
+if [ -d ${HOME}/.go ]; then
+  export PATH="$HOME/.go/bin:$PATH"
+fi
 # Resolve duplicate paths
 typeset -U path PATH
 
