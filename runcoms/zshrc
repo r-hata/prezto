@@ -46,4 +46,4 @@ fi
 # Setting plugins
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
