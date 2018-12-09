@@ -17,24 +17,23 @@ if [[ $(uname -a) == Linux*Microsoft* ]]; then
   chpwd(){echo -ne "\e]0; $(prompt-pwd)\007"}
 fi
 
+# Startup tmux
+[[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
+
 # Append PATH
 if [ -d ${HOME}/.rbenv ]; then
   # Initialize rbenv
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
 fi
-if [ -d ${HOME}/.nodebrew ]; then
-  # Initialize nodebrew
-  export PATH="$HOME/.nodebrew/current/bin:$PATH"
-fi
-if [ -d ${HOME}/.go ]; then
-  export PATH="$HOME/.go/bin:$PATH"
-fi
-# Resolve duplicate paths
-typeset -U path PATH
-
+# Initialize nodebrew
+[ -d ${HOME}/.nodebrew ] && export PATH="$HOME/.nodebrew/current/bin:$PATH"
 # go-lang setting
 export GOPATH=$HOME/.go
+[ -d ${HOME}/.go ] && export PATH="$HOME/.go/bin:$PATH"
+
+# Resolve duplicate paths
+typeset -U path PATH
 
 # Set alias
 # ls
@@ -46,5 +45,5 @@ fi
 # Setting plugins
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='rg --files --follow --hidden 2>/dev/null'
+export FZF_DEFAULT_COMMAND="rg --files --follow --hidden -g '!**/.git/*' 2>/dev/null"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
