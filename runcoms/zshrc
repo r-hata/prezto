@@ -18,7 +18,7 @@ if [[ $(uname -a) == Linux*Microsoft* ]]; then
 fi
 
 # Startup tmux
-[[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
+# [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
 
 # Append PATH
 if [ -d ${HOME}/.rbenv ]; then
