@@ -31,6 +31,8 @@ fi
 # go-lang setting
 export GOPATH=$HOME/.go
 [ -d ${HOME}/.go ] && export PATH="$HOME/.go/bin:$PATH"
+# Initialize nodenv
+eval "$(nodenv init -)"
 
 # Resolve duplicate paths
 typeset -U path PATH
