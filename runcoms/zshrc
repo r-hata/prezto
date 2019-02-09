@@ -43,12 +43,14 @@ typeset -U path PATH
 # Set alias
 # ls
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls -F --color=auto'
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls -F --color=auto'
 fi
 
 # Setting plugins
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND="rg --files --follow --hidden -g '!**/.git/*' 2>/dev/null"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+if type rg > /dev/null 2>&1; then
+  export FZF_DEFAULT_COMMAND="rg --files --follow --hidden -g '!**/.git/*' 2>/dev/null"
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
