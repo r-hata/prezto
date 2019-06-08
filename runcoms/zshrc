@@ -21,18 +21,22 @@ fi
 # [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
 
 # Append PATH
+# Initialize linuxbrew
+if [[ -d /home/linuxbrew ]]; then
+  export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+fi
 # Initialize rbenv
-if [ -d ${HOME}/.rbenv ]; then
+if [[ -d ${HOME}/.rbenv ]]; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
 fi
 # Initialize nodebrew
-[ -d ${HOME}/.nodebrew ] && export PATH="$HOME/.nodebrew/current/bin:$PATH"
+[[ -d ${HOME}/.nodebrew ]] && export PATH="$HOME/.nodebrew/current/bin:$PATH"
 # go-lang setting
 export GOPATH=$HOME/.go
-[ -d ${HOME}/.go ] && export PATH="$HOME/.go/bin:$PATH"
+[[ -d ${HOME}/.go ]] && export PATH="$HOME/.go/bin:$PATH"
 # Initialize nodenv
-if [ -d ${HOME}/.nodenv ]; then
+if [[ -d ${HOME}/.nodenv ]]; then
   export PATH="$HOME/.nodenv/bin:$PATH"
   eval "$(nodenv init -)"
 fi
@@ -42,14 +46,14 @@ typeset -U path PATH
 
 # Set alias
 # ls
-if [ -x /usr/bin/dircolors ]; then
+if [[ -x /usr/bin/dircolors ]]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
   alias ls='ls -F --color=auto'
 fi
 
 # Setting plugins
 # fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 if type rg > /dev/null 2>&1; then
   export FZF_DEFAULT_COMMAND="rg --files --follow --hidden -g '!**/.git/*' 2>/dev/null"
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
