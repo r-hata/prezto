@@ -24,6 +24,7 @@ fi
 # Initialize linuxbrew
 if [[ -d /home/linuxbrew ]]; then
   export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+  export PATH="/home/linuxbrew/.linuxbrew/sbin:$PATH"
 fi
 # Initialize rbenv
 if [[ -d ${HOME}/.rbenv ]]; then
