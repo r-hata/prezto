@@ -41,6 +41,10 @@ if [[ -d ${HOME}/.nodenv ]]; then
   export PATH="$HOME/.nodenv/bin:$PATH"
   eval "$(nodenv init -)"
 fi
+# github CLI setting
+if type "hub" > /dev/null 2>&1; then
+  eval "$(hub alias -s)"
+fi
 
 # Resolve duplicate paths
 typeset -U path PATH
