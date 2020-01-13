@@ -24,9 +24,6 @@ if [[ -d ${HOME}/.rbenv ]]; then
 fi
 # Initialize nodebrew
 [[ -d ${HOME}/.nodebrew ]] && export PATH="$HOME/.nodebrew/current/bin:$PATH"
-# go-lang setting
-export GOPATH=$HOME/.go
-[[ -d ${HOME}/.go ]] && export PATH="$HOME/.go/bin:$PATH"
 # Initialize nodenv
 if [[ -d ${HOME}/.nodenv ]]; then
   export PATH="$HOME/.nodenv/bin:$PATH"
