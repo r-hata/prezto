@@ -11,15 +11,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-# Display Current Directory on WSL Terminal Titlebar.
-if [[ $(uname -a) == Linux*Microsoft* ]]; then
-  echo -ne "\e]0;  $(prompt-pwd)\007"
-  chpwd(){echo -ne "\e]0; $(prompt-pwd)\007"}
-fi
-
-# Startup tmux
-# [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
-
 # Append PATH
 # Initialize linuxbrew
 if [[ -d /home/linuxbrew ]]; then
