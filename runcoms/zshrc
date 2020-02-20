@@ -23,17 +23,15 @@ if [[ -d ${HOME}/.rbenv ]]; then
   eval "$(rbenv init -)"
 fi
 # go-lang setting
-[[ -n ${HOME}/go ]] && export PATH="$HOME/go/bin:$PATH"
-# Initialize nodebrew
-[[ -d ${HOME}/.nodebrew ]] && export PATH="$HOME/.nodebrew/current/bin:$PATH"
+[[ -d ${HOME}/go ]] && export PATH="$HOME/go/bin:$PATH"
 # Initialize nodenv
 if [[ -d ${HOME}/.nodenv ]]; then
   export PATH="$HOME/.nodenv/bin:$PATH"
   eval "$(nodenv init -)"
 fi
-# github CLI setting
-if type "hub" > /dev/null 2>&1; then
-  eval "$(hub alias -s)"
+# yarn setting
+if type "yarn" > /dev/null 2>&1; then
+  export PATH="$PATH:`yarn global bin`"
 fi
 
 # Resolve duplicate paths
