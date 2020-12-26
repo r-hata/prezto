@@ -33,15 +33,22 @@ fi
 if type "yarn" > /dev/null 2>&1; then
   export PATH="$PATH:`yarn global bin`"
 fi
+# rust setting
+[[ -d ${HOME}/.cargo ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
 # Resolve duplicate paths
 typeset -U path PATH
 
 # Set alias
 # ls
-if [[ -x /usr/bin/dircolors ]]; then
+if type "exa" > /dev/null 2>&1; then
+  alias ls='exa -F --time-style=iso'
+  alias la='exa -lhaF --time-style=iso'
+elif [[ -x /usr/bin/dircolors ]]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-  alias ls='ls -F --color=auto'
+  alias ls='ls --color=auto -F --time-style=iso'
+else
+  alias ls='ls -F --time-style=iso'
 fi
 
 # Setting plugins
