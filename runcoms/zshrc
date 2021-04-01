@@ -34,7 +34,10 @@ if type "yarn" > /dev/null 2>&1; then
   export PATH="$PATH:`yarn global bin`"
 fi
 # rust setting
-[[ -d ${HOME}/.cargo ]] && export PATH="$HOME/.cargo/bin:$PATH"
+[[ -s "${HOME}/.cargo/env" ]] && source "$HOME/.cargo/env"
+if type "rustc" > /dev/null 2>&1; then
+  export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/library
+fi
 
 # Resolve duplicate paths
 typeset -U path PATH
@@ -45,7 +48,7 @@ if type "exa" > /dev/null 2>&1; then
   alias ls='exa -F --time-style=iso'
   alias la='exa -lhaF --time-style=iso'
 elif [[ -x /usr/bin/dircolors ]]; then
-  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  test -r $HOME/.dircolors && eval "$(dircolors -b $HOME/.dircolors)" || eval "$(dircolors -b)"
   alias ls='ls --color=auto -F --time-style=iso'
 else
   alias ls='ls -F --time-style=iso'
@@ -53,8 +56,11 @@ fi
 
 # Setting plugins
 # fzf
-[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
-if type rg > /dev/null 2>&1; then
-  export FZF_DEFAULT_COMMAND="rg --files --follow --hidden -g '!**/.git/*' 2>/dev/null"
+[[ -s "${HOME}/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
+if type fd > /dev/null 2>&1; then
+  export FZF_DEFAULT_COMMAND="fd --type f --follow --hidden --exclude '**/.git/*' 2>/dev/null"
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+elif type rg > /dev/null 2>&1; then
+  export FZF_DEFAULT_COMMAND="rg --files --follow --hidden --glob '!**/.git/*' 2>/dev/null"
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
